@@ -1,0 +1,61 @@
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #11084b; /* Blue background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    color: #ff27c3; /* Pink for branding */
+    margin-left: 20px; /* Adjusted spacing */
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    width: 400px; /* Set the desired width */
+    height: auto; /* Maintain aspect ratio */
+    margin-left: 60px;
+}
+
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 10px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff; /* White text */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-links a.active, 
+.nav-links a:hover {
+    color: #ff27c3; /* Pink for hover and active state */
+}
+
+.profile-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 40px;
+    padding-right: 80px;
+}
+
+.profile-icon img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%; /* Circle image */
+    object-fit: cover;
+}

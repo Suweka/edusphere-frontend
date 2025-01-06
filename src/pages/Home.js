@@ -1,11 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import Navbar from "../components/Navbar"; // Import Navbar
 import "../styles/Home.css";
 
 const Home = () => {
   return (
     <div className="home-container">
-      
       <main className="home-main">
         <div className="welcome-section">
           <h1 className="main-title">
@@ -13,12 +13,15 @@ const Home = () => {
             <br /> MANAGEMENT SYSTEM
           </h1>
           <p className="subtitle">
-            Welcome to EduSphere! Empowering education through efficient management.<br />
-            Your hub for academic and administrative excellence.
+            Welcome to EduSphere, a modern Student Management System crafted for seamless academic 
+            and administrative efficiency. With intuitive navigation and centralized features for 
+            managing students, courses, enrollments, and user profiles, EduSphere empowers education 
+            institutions to streamline operations and achieve excellence.
           </p>
           <div className="action-buttons">
-            <a href="#register" className="btn register-btn">Register</a>
-            <a href="#login" className="btn login-btn">Login</a>
+            {/* Replace href with Link */}
+            <Link to="/register" className="btn register-btn">Register</Link>
+            <Link to="/login" className="btn login-btn">Login</Link>
           </div>
         </div>
         <div className="illustration">
@@ -26,8 +29,7 @@ const Home = () => {
         </div>
       </main>
       <footer className="footer">
-        <p>© 2025 EduSphere. All Rights Reserved.
-        </p>
+        <p>© 2025 EduSphere. All Rights Reserved.</p>
       </footer>
     </div>
   );

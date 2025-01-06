@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import api from '../utils/api';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../utils/api";
+import "../styles/Register.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+    role: "viewer", // Default role
   });
-  const [error, setError] = useState('');
+
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -21,24 +25,26 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
+    setSuccessMessage("");
 
     try {
-      await api.post('/register', formData);
-
-      // Redirect to login page on successful registration
-      navigate('/login');
+      await api.post("/register", formData);
+      setSuccessMessage("Registration successful! Redirecting to login...");
+      // Redirect to login page after a delay
+      setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
-      setError('Failed to register. Please check your inputs and try again.');
+      setError("Failed to register. Please check your inputs and try again.");
       console.error(err);
     }
   };
 
   return (
-    <div>
+    <div className="register-container">
       <h1>Register</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
+      {error && <p className="error-message">{error}</p>}
+      {successMessage && <p className="success-message">{successMessage}</p>}
+      <form className="register-form" onSubmit={handleSubmit}>
         <div>
           <label>Name</label>
           <input
@@ -79,9 +85,21 @@ const Register = () => {
             required
           />
         </div>
+        <div>
+          <label>Role</label>
+          <select
+            name="role"
+            value={formData.role}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="viewer">Viewer</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
         <button type="submit">Register</button>
       </form>
-      <p>
+      <p className="login-link">
         Already have an account? <a href="/login">Login</a>
       </p>
     </div>
@@ -89,3 +107,4 @@ const Register = () => {
 };
 
 export default Register;
+

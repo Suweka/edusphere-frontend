@@ -14,13 +14,15 @@ const Navbar = () => {
         <li><Link to="/students">Students</Link></li>
         <li><Link to="/courses">Courses</Link></li>
         <li><Link to="/enrollments">Enrollments</Link></li>
-        <li><Link to="/profile">Profile</Link></li>
       </ul>
       <div className="profile-icon">
-        <img src={require("../assets/profile-icon.png")} alt="Profile" />
+        <Link to="/profile">
+          <img src={require("../assets/profile-icon.png")} alt="Profile" />
+        </Link>
       </div>
     </nav>
   );
 };
 
 export default Navbar;
+

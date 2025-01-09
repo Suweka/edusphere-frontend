@@ -1,57 +1,143 @@
-import React, { useEffect, useState } from 'react';
-import api from '../utils/api';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../utils/api";
+import "../styles/Enrollments.css";
 
 const Enrollments = () => {
   const [enrollments, setEnrollments] = useState([]);
-  const [role, setRole] = useState('viewer'); // Update based on logged-in user
-  const navigate = useNavigate();
+  const [userRole, setUserRole] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1); // Current page
+  const [totalPages, setTotalPages] = useState(1); // Total pages
+  const navigate = useNavigate(); // To handle navigation
 
+  // Fetch enrollments and user role on component mount
   useEffect(() => {
-    // Fetch enrollments from the API
-    api.get('/enrollments')
-      .then(response => setEnrollments(response.data.data))
-      .catch(error => console.error(error));
+    const fetchEnrollments = async () => {
+      try {
+        const response = await api.get(`/v1/enrollments?page=${currentPage}`);
+        setEnrollments(response.data.data); // Assuming API returns { data: [...], meta: { ... } }
+        setTotalPages(response.data.meta.last_page); // Assuming API includes meta data for pagination
+      } catch (err) {
+        console.error("Error fetching enrollments:", err);
+      }
+    };
 
-    // Fetch user role (this is a placeholder; replace with actual authentication logic)
-    api.get('/user')
-      .then(response => setRole(response.data.role))
-      .catch(error => {
-        console.error(error);
-        // If not authenticated, redirect to login
-        navigate('/login');
-      });
-  }, [navigate]);
+    const fetchUserRole = async () => {
+      try {
+        const response = await api.get("/user");
+        setUserRole(response.data.role);
+      } catch (err) {
+        console.error("Error fetching user role:", err);
+      }
+    };
 
-  const handleDelete = (id) => {
-    if (role === 'admin') {
-      api.delete(`/enrollments/${id}`)
-        .then(() => {
-          setEnrollments(enrollments.filter(enrollment => enrollment.id !== id));
-        })
-        .catch(error => console.error(error));
+    fetchEnrollments();
+    fetchUserRole();
+  }, [currentPage]); // Fetch data when currentPage changes
+
+  // Handle Delete
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this enrollment?")) {
+      try {
+        await api.delete(`/v1/enrollments/${id}`);
+        setEnrollments((prev) =>
+          prev.filter((enrollment) => enrollment.id !== id)
+        );
+        alert("Enrollment deleted successfully.");
+      } catch (err) {
+        console.error("Error deleting enrollment:", err);
+        alert("Failed to delete enrollment.");
+      }
     }
   };
 
+  // Handle Update
+  const handleUpdate = (id) => {
+    navigate(`/enrollments/update/${id}`);
+  };
+
+  // Handle Pagination
+  const handlePageChange = (newPage) => {
+    if (newPage > 0 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
+  // Redirect to Add New Enrollment Page
+  const redirectToAddEnrollment = () => {
+    navigate("/enrollments/add");
+  };
+
   return (
-    <div>
-      <h1>Enrollments</h1>
-      <ul>
-        {enrollments.map(enrollment => (
-          <li key={enrollment.id}>
-            <p>Enrollment ID: {enrollment.id}</p>
-            <p>Student: {enrollment.student_name} (ID: {enrollment.student_id})</p>
-            <p>Course: {enrollment.course_title} (ID: {enrollment.course_id})</p>
-            <p>Date: {enrollment.enrollment_date}</p>
-            {role === 'admin' && (
-              <>
-                {/* Implement Edit functionality as needed */}
-                <button onClick={() => handleDelete(enrollment.id)}>Delete</button>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
+    <div className="enrollments-container">
+      <h1>Enrollment List</h1>
+
+      {/* Add New Enrollment Button */}
+      {userRole === "admin" && (
+        <div className="add-enrollment-button-container">
+          <button
+            onClick={redirectToAddEnrollment}
+            className="add-enrollment-button"
+          >
+            Add New Enrollment
+          </button>
+        </div>
+      )}
+
+      <table className="enrollments-table">
+        <thead>
+          <tr>
+            <th>STUDENT ID</th>
+            <th>COURSE ID</th>
+            <th>ENROLLMENT DATE</th>
+            {userRole === "admin" && <th>ACTIONS</th>}
+          </tr>
+        </thead>
+        <tbody>
+          {enrollments.map((enrollment) => (
+            <tr key={enrollment.id}>
+              <td>{enrollment.student_id}</td>
+              <td>{enrollment.course_id}</td>
+              <td>{enrollment.enrollment_date}</td>
+              {userRole === "admin" && (
+                <td>
+                  <button
+                    className="update-btn"
+                    onClick={() => handleUpdate(enrollment.id)}
+                  >
+                    Update
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(enrollment.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Pagination Controls */}
+      <div className="pagination">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

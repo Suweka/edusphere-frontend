@@ -2,25 +2,25 @@
 .navbar {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; /* Center items vertically */
     padding: 10px 20px;
     background-color: #11084b; /* Blue background */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: fixed; /* Ensure navbar stays at the top */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Set a high z-index to ensure it appears above other elements */
 }
 
 .logo {
-    color: #ff27c3; /* Pink for branding */
-    margin-left: 20px; /* Adjusted spacing */
     display: flex;
     align-items: center;
 }
 
 .navbar-logo {
-    width: 400px; /* Set the desired width */
+    width: 280px; /* Adjust the logo size */
     height: auto; /* Maintain aspect ratio */
-    margin-left: 60px;
 }
-
 
 .nav-links {
     list-style: none;
@@ -49,25 +49,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 40px;
-    padding-right: 80px;
 }
 
 .profile-icon img {
-    width: 70px;
-    height: 70px;
+    width: 40px; /* Adjust size for consistency */
+    height: 40px;
     border-radius: 50%; /* Circle image */
     object-fit: cover;
+    margin-right: 60px;
 }
-
-.navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-  }
-  
-  .navbar ul li {
-    list-style-type: none; /* Prevent dots */
-    margin: 0 10px; /* Adjust spacing */
-  }

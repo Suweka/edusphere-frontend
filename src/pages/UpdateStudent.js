@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import api from "../utils/api";
 import "../styles/UpdateStudent.css";
 
-
 const UpdateStudent = () => {
   const { id } = useParams(); // Get the student ID from the URL
   const navigate = useNavigate();
@@ -17,8 +16,8 @@ const UpdateStudent = () => {
     const fetchStudent = async () => {
       try {
         const response = await api.get(`/v1/students/${id}`);
-        setFormData(response.data);
-        setOriginalData(response.data); // Save original data to detect changes
+        setFormData(response.data.data);
+        setOriginalData(response.data.data); // Save original data to detect changes
       } catch (err) {
         console.error("Error fetching student details:", err);
         setError("Failed to fetch student details.");

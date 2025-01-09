@@ -1,0 +1,72 @@
+.enrollments-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    color: white;
+    padding-top: 300px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .enrollments-container h1 {
+    text-align: center;
+    margin-top: 300px;
+    color: #ff6ec7;
+    margin-bottom: 20px;
+  }
+  
+  .add-enrollment-button {
+    background-color: #ff6ec7;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    margin-left: 400px;
+  }
+  
+  .add-enrollment-btn:hover {
+    background-color: #e055b2;
+  }
+  
+  .enrollments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .enrollments-table th,
+  .enrollments-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .enrollments-table th {
+    background-color: #11084b;
+    color: #ff6ec7;
+  }
+  
+  .enrollments-table tr:nth-child(even) {
+    background-color: #1c1056;
+  }
+  
+  .enrollments-table tr:hover {
+    background-color: #000000;
+    color: white;
+  }
+  
+  .delete-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .delete-btn:hover {
+    background-color: #d32f2f;
+  }
+  

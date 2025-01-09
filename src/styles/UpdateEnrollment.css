@@ -1,0 +1,50 @@
+.update-enrollment-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #11084b;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .update-enrollment-container h1 {
+    color: #ff6ec7;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 80px;
+  }
+  
+  .update-enrollment-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .update-enrollment-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .update-enrollment-container input {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .update-enrollment-container button {
+    padding: 10px;
+    background-color: #ff6ec7;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .update-enrollment-container button:hover {
+    background-color: #e60073;
+  }
+  

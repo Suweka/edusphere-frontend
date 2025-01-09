@@ -1,7 +1,7 @@
 .register-container {
     max-width: 400px;
     margin: 50px auto;
-    padding: 20px;
+    padding: 70px;
     background-color: #11084b;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -10,7 +10,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 70vh; /* To push content to occupy full height */
+    margin-top: 110px;
+    min-height: 60vh; /* To push content to occupy full height */
 }
 
 .register-container h1 {
@@ -43,7 +44,7 @@
 .register-form select{
     padding: 10px;
     margin-bottom: 15px;
-    padding-right: 60px;
+    padding-right: 100px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;

@@ -1,0 +1,74 @@
+/* login.css */
+
+/* Set background color and full height/width for the page */
+.login-body {
+    background-color: #11084b; /* Deep navy blue */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the login form container */
+.login-form {
+    background-color: #11084b; /* White background */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+}
+
+/* Style labels */
+.login-label {
+    display: block;
+    font-size: 16px;
+    color: white; /* Black text */
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+/* Style input fields */
+.login-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid grey; /* Grey border */
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Style error message */
+.login-error {
+    color: #ff27c3; /* Pink for error message */
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+/* Style the login button */
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff27c3; /* Bright pink button */
+    color: white; /* White text */
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #d321a6; /* Darker pink on hover */
+}
+
+/* Add responsive behavior */
+@media (max-width: 480px) {
+    .login-form {
+        width: 90%;
+    }
+}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import api from "../utils/api";
 import { useNavigate } from "react-router-dom";
+import "../styles/login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,25 +28,27 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleLogin}>
+    <form className="login-form" onSubmit={handleLogin}>
       <div>
-        <label>Email:</label>
+        <label className="login-label">Email:</label>
         <input
+          className="login-input"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div>
-        <label>Password:</label>
+        <label className="login-label">Password:</label>
         <input
+          className="login-input"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <button type="submit">Login</button>
+      {error && <p className="login-error">{error}</p>}
+      <button className="login-button" type="submit">Login</button>
     </form>
   );
 };

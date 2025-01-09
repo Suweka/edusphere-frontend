@@ -1,0 +1,80 @@
+.profile-container {
+    max-width: 600px;
+    margin: 120px auto; /* Adjust margin for better spacing */
+    padding: 20px 30px;
+    background-color: #11084b; /* White background for contrast */
+    color: #11084b; /* Blue text for headings */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(229, 118, 220, 100); /* Subtle shadow for depth */
+    text-align: center; /* Center-align content */
+    font-family: Arial, sans-serif;
+}
+
+.profile-container h1 {
+    color: #ff27c3; /* Pink for a vibrant highlight */
+    font-size: 36px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.profile-container p {
+    font-size: 18px;
+    margin: 10px 0;
+    line-height: 1.6;
+    color: #ffffff; /* Grey for body text */
+}
+
+.profile-container span {
+    font-weight: bold;
+    color: #11084b; /* Blue for key highlights */
+}
+
+.profile-avatar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.profile-avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #ff27c3; /* Pink border for avatar */
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.profile-actions button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.profile-actions .edit-btn {
+    background-color: #ff27c3; /* Pink button */
+    color: #fff; /* White text */
+}
+
+.profile-actions .edit-btn:hover {
+    background-color: #e055b1; /* Darker pink on hover */
+}
+
+.profile-actions .logout-btn {
+    background-color: #e60073; /* Red button */
+    color: #fff; /* White text */
+}
+
+.profile-actions .logout-btn:hover {
+    background-color: #c0455c; /* Darker red on hover */
+}

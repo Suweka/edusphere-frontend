@@ -1,128 +1,140 @@
-import React, { useEffect, useState } from 'react';
-import api from '../utils/api';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../utils/api";
+import "../styles/Courses.css";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
-  const [role, setRole] = useState('viewer'); // Update based on logged-in user
-  const [newCourse, setNewCourse] = useState({
-    title: '',
-    description: '',
-    duration: '',
-    level: '',
-  });
-  const navigate = useNavigate();
+  const [userRole, setUserRole] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1); // Current page
+  const [totalPages, setTotalPages] = useState(1); // Total pages
+  const navigate = useNavigate(); // To handle navigation
 
+  // Fetch courses and user role on component mount
   useEffect(() => {
-    // Fetch courses from the API
-    api.get('/courses')
-      .then(response => setCourses(response.data.data))
-      .catch(error => console.error(error));
+    const fetchCourses = async () => {
+      try {
+        const response = await api.get(`/v1/courses?page=${currentPage}`);
+        setCourses(response.data.data); // Assuming API returns { data: [...], meta: { ... } }
+        setTotalPages(response.data.meta.last_page); // Assuming API includes meta data for pagination
+      } catch (err) {
+        console.error("Error fetching courses:", err);
+      }
+    };
 
-    // Fetch user role (this is a placeholder; replace with actual authentication logic)
-    api.get('/user')
-      .then(response => setRole(response.data.role))
-      .catch(error => {
-        console.error(error);
-        // If not authenticated, redirect to login
-        navigate('/login');
-      });
-  }, [navigate]);
+    const fetchUserRole = async () => {
+      try {
+        const response = await api.get("/user");
+        setUserRole(response.data.role);
+      } catch (err) {
+        console.error("Error fetching user role:", err);
+      }
+    };
 
-  const handleDelete = (id) => {
-    if (role === 'admin') {
-      api.delete(`/courses/${id}`)
-        .then(() => {
-          setCourses(courses.filter(course => course.id !== id));
-        })
-        .catch(error => console.error(error));
+    fetchCourses();
+    fetchUserRole();
+  }, [currentPage]); // Fetch data when currentPage changes
+
+  // Handle Delete
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this course?")) {
+      try {
+        await api.delete(`/v1/courses/${id}`);
+        setCourses((prev) => prev.filter((course) => course.id !== id));
+        alert("Course deleted successfully.");
+      } catch (err) {
+        console.error("Error deleting course:", err);
+        alert("Failed to delete course.");
+      }
     }
   };
 
-  const handleInputChange = (e) => {
-    setNewCourse({
-      ...newCourse,
-      [e.target.name]: e.target.value,
-    });
+  // Handle Update
+  const handleUpdate = (id) => {
+    navigate(`/courses/update/${id}`);
   };
 
-  const handleAddCourse = (e) => {
-    e.preventDefault();
-    if (role === 'admin') {
-      api.post('/courses', newCourse)
-        .then(response => {
-          setCourses([...courses, response.data]);
-          setNewCourse({
-            title: '',
-            description: '',
-            duration: '',
-            level: '',
-          });
-        })
-        .catch(error => console.error(error));
+  // Handle Pagination
+  const handlePageChange = (newPage) => {
+    if (newPage > 0 && newPage <= totalPages) {
+      setCurrentPage(newPage);
     }
+  };
+
+  // Redirect to Add New Course Page
+  const redirectToAddCourse = () => {
+    navigate("/courses/add");
   };
 
   return (
-    <div>
-      <h1>Courses</h1>
-      {role === 'admin' && (
-        <form onSubmit={handleAddCourse}>
-          <h2>Add New Course</h2>
-          <input
-            type="text"
-            name="title"
-            placeholder="Title"
-            value={newCourse.title}
-            onChange={handleInputChange}
-            required
-          />
-          <textarea
-            name="description"
-            placeholder="Description"
-            value={newCourse.description}
-            onChange={handleInputChange}
-            required
-          />
-          <input
-            type="number"
-            name="duration"
-            placeholder="Duration (hours)"
-            value={newCourse.duration}
-            onChange={handleInputChange}
-            required
-          />
-          <select
-            name="level"
-            value={newCourse.level}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">Select Level</option>
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Advanced">Advanced</option>
-          </select>
-          <button type="submit">Add Course</button>
-        </form>
+    <div className="courses-container">
+      <h1>Course List</h1>
+
+      {/* Add New Course Button */}
+      {userRole === "admin" && (
+        <div className="add-course-button-container">
+          <button onClick={redirectToAddCourse} className="add-course-btn">
+            Add New Course
+          </button>
+        </div>
       )}
-      <ul>
-        {courses.map(course => (
-          <li key={course.id}>
-            <h3>{course.title}</h3>
-            <p>{course.description}</p>
-            <p>Duration: {course.duration} hours</p>
-            <p>Level: {course.level}</p>
-            {role === 'admin' && (
-              <>
-                {/* Implement Edit functionality as needed */}
-                <button>Edit</button>
-                <button onClick={() => handleDelete(course.id)}>Delete</button>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
+
+      <table className="courses-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Duration (Hours)</th>
+            <th>Level</th>
+            {userRole === "admin" && <th>Actions</th>}
+          </tr>
+        </thead>
+        <tbody>
+          {courses.map((course) => (
+            <tr key={course.id}>
+              <td>{course.title}</td>
+              <td>{course.description}</td>
+              <td>{course.duration}</td>
+              <td>{course.level}</td>
+              {userRole === "admin" && (
+                <td>
+                  <button
+                    className="update-btn"
+                    onClick={() => handleUpdate(course.id)}
+                  >
+                    Update
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(course.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Pagination Controls */}
+      <div className="pagination">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

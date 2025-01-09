@@ -1,0 +1,219 @@
+.students-container {
+    padding: 20px;
+    background-color: #11084b; /* Match the webpage background */
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+  }
+  
+  .students-container h1 {
+    color: #ff6ec7; /* Vibrant highlight color */
+    margin-top: 620px;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .students-table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); /* Soft shadow */
+    overflow: hidden;
+    border-radius: 10px; /* Rounded corners */
+  }
+  
+  .students-table th,
+  .students-table td {
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 15px;
+  }
+  
+  .students-table th {
+    background: #11084b; /* Deep purple for the header */
+    color: #ff6ec7; /* Vibrant pink text */
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    border: 1px solid #39395d; /* Subtle borders */
+
+  }
+  
+  .students-table tr:nth-child(even) {
+    background-color: #1d0048; /* Slightly lighter purple */
+  }
+  
+  .students-table tr:nth-child(odd) {
+    background-color: #11084b; /* Deep purple */
+  }
+  
+  .students-table tr:hover {
+    background-color: #000000; /* Highlight row on hover */
+    color: #11084b; /* Dark text for contrast */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+  
+  .students-table td {
+    color: #e5e5f7; /* Soft white for table text */
+    border: 1px solid #39395d; /* Subtle borders */
+  }
+  
+  .students-table td:first-child {
+    font-weight: bold; /* Highlight the first column */
+  }
+  
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .pagination button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 50px;
+    background: #ff6ec7; /* Vibrant pink */
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+  .pagination button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .pagination button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }
+  
+  .pagination span {
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .update-btn,
+.delete-btn {
+  padding: 5px 10px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.update-btn {
+  background-color: #3ddc50;
+  color: white;
+}
+
+.update-btn:hover {
+  background-color: #e60073;
+}
+
+.delete-btn {
+  background-color: #e60073;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #b0004f;
+}
+
+/* Add Student Section Styles */
+.add-student-container {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #11084b; /* Matches the theme */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 800px;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .add-student-container h2 {
+    text-align: center;
+    color: #ff6ec7; /* Highlight the title */
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .add-student-container form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-between;
+  }
+  
+  .add-student-container form div {
+    flex: 1 1 calc(50% - 10px);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .add-student-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .add-student-container input,
+  .add-student-container select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f7f7f7;
+  }
+  
+  .add-student-container input:focus,
+  .add-student-container select:focus {
+    border-color: #ff6ec7; /* Highlight focus state */
+    outline: none;
+  }
+  
+  .add-student-container button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #ff6ec7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-student-container button:hover {
+    background-color: #e055b1; /* Darken the button on hover */
+  }
+  
+  .add-student-container .error-message,
+  .add-student-container .success-message {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .add-student-container .error-message {
+    color: red;
+  }
+  
+  .add-student-container .success-message {
+    color: green;
+  }
+  
